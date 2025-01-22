@@ -1,4 +1,4 @@
-# ⚔ VRC Katana Kills You
+# ⚔ VRC Katana Kills You ⚔
 
 ## なにこれ
 
@@ -13,15 +13,19 @@
 
 1. https://nodejs.org/ja/download からNode.jsをインストール
 2. 当画面( https://github.com/woorld/vrc-katana-kills-you )の右上から「Code」→「Download ZIP」を押してソースをダウンロード
-3. ダウンロードしたファイルを展開し、出てきた`run.bat`を実行 (`VRC Katana Kills You: Start listening`と出てきたらOK)
-4. VRChatのExpressionMenuからOSCをオン
+3. ダウンロードしたファイルを展開
+4. `install.bat`を実行
+5. `run.bat`を実行 (`VRC Katana Kills You: Start listening`と出てきたらOK)
+6. VRChatのExpressionMenuからOSCをオン
 
 以上を行ったうえでカタナキットを使って対戦すると、負けた後VRChatが終了します。
 
+以降のツール側の準備は`run.bat`を起動するだけで完了します。
+
 ## ご注意
 
-- どのアバター・ギミックでも`BJK/IsDead`というパラメータがtrueになったら動作します。
-- VRChatクライアントやPCに負荷をかけて強引に終了させるわけではなく、`taskkill`コマンドを叩いてプロセスを終了しています。
-- 「VRChat.exe」という名前のプロセスを**すべて**終了させるため、複数クライアントを起動している場合や、同名のプロセスが存在する場合はそれらが**すべて**終了します。
-- 使用は自己責任でお願いします。
+- アバターやギミックによらず、`BJK/IsDead`というパラメータがtrueになったら動作します
+- VRChatクライアントやPCに負荷をかけて強引に終了させるわけではなく、`taskkill`コマンドを叩いてプロセスを終了しています
+- 「VRChat.exe」という名前のプロセスを **すべて** 終了させるため、複数クライアントを起動している場合や、同名のプロセスが存在する場合はそれらが **すべて** 終了します
+- 使用は自己責任でお願いします
 - Nodeのこと1ミリくらいしかわかりません
