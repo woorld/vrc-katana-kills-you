@@ -9,5 +9,8 @@
   },
   "keywords": [],
   "author": "woorld",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-osc": "^9.1.4"
+  }
 }
