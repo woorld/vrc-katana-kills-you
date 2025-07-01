@@ -1,10 +1,12 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { Server } from 'node-osc';
 import path from 'path';
 import child_process from 'child_process';
 
 const { exec } = child_process;
 const oscDeadMessage = '/avatar/parameters/BJK/IsDead';
+let oscServer;
+let isActive = true;
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -16,15 +18,22 @@ const createWindow = () => {
     },
   });
 
-  const oscServer = new Server(9001, '0.0.0.0', () => {
+  oscServer = new Server(9001, '0.0.0.0', () => {
     console.log('VRC Katana Kills You: Start listening');
   });
 
   oscServer.on(oscDeadMessage, (value) => {
-    if (value[1]) {
+    if (value[1] && isActive) {
       // 死んだら1秒後にVRCを殺す
       setTimeout(() => exec('taskkill /IM VRChat.exe'), 1000);
+      // console.log('IsDead Listened'); // テスト用
     }
+  });
+
+  ipcMain.handle('toggle-active', async () => {
+    // OSCのリッスンを一時停止するほうがいいかも？
+    isActive = !isActive;
+    return isActive;
   });
 
   mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする
@@ -35,4 +44,7 @@ app.once('ready', () => {
   createWindow();
 });
 
-app.once('window-all-closed', () => app.quit());
+app.once('window-all-closed', () => {
+  oscServer.close();
+  app.quit();
+});
