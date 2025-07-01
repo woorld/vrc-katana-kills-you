@@ -31,8 +31,8 @@ const createWindow = () => {
   oscServer.on(oscDeadMessage, (value) => {
     if (value[1] && isActive) {
       // 死んだら1秒後にVRCを殺す
-      // setTimeout(() => exec('taskkill /IM VRChat.exe'), 1000);
-      console.log('IsDead Listened'); // テスト用
+      setTimeout(() => exec('taskkill /IM VRChat.exe'), 1000);
+      // console.log('IsDead Listened'); // テスト用
     }
   });
 
