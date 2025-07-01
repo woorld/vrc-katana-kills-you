@@ -2,10 +2,10 @@
   "name": "vrc-katana-kills-you",
   "version": "0.0.1",
   "description": "カタナキットで負けた時にVRChatクライアントを終了するOSCツール",
-  "main": "main.js",
+  "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "start": "node main.js"
+    "start": "electron ."
   },
   "keywords": [],
   "author": "woorld",
