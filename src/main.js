@@ -1,9 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import { Server } from 'node-osc';
-import path from 'path';
-import child_process from 'child_process';
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { Server } = require('node-osc');
+const path = require('path');
+const { exec } = require('child_process');
 
-const { exec } = child_process;
 const oscDeadMessage = '/avatar/parameters/BJK/IsDead';
 let oscServer;
 let isActive = true;
@@ -19,7 +18,7 @@ const createWindow = () => {
     // */
     title: 'VRC Katana Kills You',
     webPreferences: {
-      preload: path.join(import.meta.dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
     },
     autoHideMenuBar: true,
   });
