@@ -10,12 +10,18 @@ let isActive = true;
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    // テスト用
+    /*
     width: 1000,
     height: 600,
+    // */
     title: 'VRC Katana Kills You',
     webPreferences: {
       preload: path.join(import.meta.dirname, 'preload.js'),
     },
+    autoHideMenuBar: true,
   });
 
   oscServer = new Server(9001, '0.0.0.0', () => {
@@ -25,8 +31,8 @@ const createWindow = () => {
   oscServer.on(oscDeadMessage, (value) => {
     if (value[1] && isActive) {
       // 死んだら1秒後にVRCを殺す
-      setTimeout(() => exec('taskkill /IM VRChat.exe'), 1000);
-      // console.log('IsDead Listened'); // テスト用
+      // setTimeout(() => exec('taskkill /IM VRChat.exe'), 1000);
+      console.log('IsDead Listened'); // テスト用
     }
   });
 
@@ -36,7 +42,7 @@ const createWindow = () => {
     return isActive;
   });
 
-  mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする
+  // mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする
   mainWindow.loadFile('index.html');
 };
 
