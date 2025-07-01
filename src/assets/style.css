@@ -20,6 +20,18 @@ body {
   background: linear-gradient(135deg, #eee, #777)
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.title img {
+  width: 48px;
+  height: 48px;
+}
+
 button {
   padding: 12px 16px;
   font-size: 20px;
