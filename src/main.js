@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { Server } = require('node-osc');
 const path = require('path');
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 
 const oscDeadMessage = '/avatar/parameters/BJK/IsDead';
 let oscServer;
@@ -27,17 +27,21 @@ const createWindow = () => {
     console.log('VRC Katana Kills You: Start listening');
   });
 
-  oscServer.on(oscDeadMessage, (value) => {
-    if (value[1] && isActive) {
-      // 死んだら1秒後にVRCを殺す
-      setTimeout(() => exec('taskkill /IM VRChat.exe'), 2800);
+  oscServer.on(oscDeadMessage, async (value) => {
+    if (!value[1] || !isActive) {
+      return;
+    }
+
+    setTimeout(() => {
+      // 死んだらn秒後にVRCを殺す
+      execSync('taskkill /IM VRChat.exe');
       // console.log('IsDead Listened'); // テスト用
 
       if (shouldAutoClose) {
         oscServer.close();
         app.quit();
       }
-    }
+    }, 2800);
   });
 
   // 設定変更時の処理
