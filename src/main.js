@@ -21,6 +21,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
     },
     autoHideMenuBar: true,
+    show: false, // ページがロードされるまではウィンドウを非表示にする
   });
 
   oscServer = new Server(9001, '0.0.0.0', () => {
@@ -42,6 +43,9 @@ const createWindow = () => {
 
   // mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする
   mainWindow.loadFile('index.html');
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show();
+  })
 };
 
 app.once('ready', () => {
