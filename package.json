@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "osc:send": "node tools/osc-sender",
+    "osc:listen": "node tools/osc-listener"
   },
   "keywords": [],
   "author": "woorld",
