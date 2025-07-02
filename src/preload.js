@@ -2,5 +2,5 @@
 const { ipcRenderer, contextBridge } = require('electron');
 
 contextBridge.exposeInMainWorld('osc', {
-  toggleActive: () => ipcRenderer.invoke('toggle-active'),
+  changeActive: isActive => ipcRenderer.send('change-active', isActive),
 });

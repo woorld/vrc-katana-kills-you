@@ -1,6 +1,5 @@
-const button = document.getElementById('toggle-active');
+const toggle = document.getElementById('toggle-active');
 
-button.addEventListener('click', async () => {
-  const isActive = await window.osc.toggleActive();
-  button.textContent = `${isActive ? 'OFF' : 'ON'}にする`;
+toggle.addEventListener('change', async e => {
+  await window.osc.changeActive(e.target.checked);
 });

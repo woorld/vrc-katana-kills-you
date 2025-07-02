@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 
 const oscDeadMessage = '/avatar/parameters/BJK/IsDead';
 let oscServer;
-let isActive = true;
+let isActive = false;
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -35,10 +35,9 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.handle('toggle-active', async () => {
+  ipcMain.on('change-active', async () => {
     // OSCのリッスンを一時停止するほうがいいかも？
     isActive = !isActive;
-    return isActive;
   });
 
   // mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする

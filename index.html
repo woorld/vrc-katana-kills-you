@@ -8,10 +8,17 @@
 </head>
 <body>
   <div class="title">
-    <img src="src/assets/logo.png" alt="VRC Katana Kills Youのロゴ">
-    <h1>VRC Katana Kills You</h1>
+    <img
+      src="src/assets/logo.png"
+      alt="VRC Katana Kills Youのロゴ"
+      class="title__logo"
+    >
+    <h1 class="title__text">VRC Katana Kills You</h1>
   </div>
-  <button id="toggle-active">OFFにする</button>
+  <label class="toggle__wrapper">
+    <input id="toggle-active" class="toggle__input" type="checkbox">
+  </label>
+  <!-- <button id="toggle-active">OFFにする</button> -->
   <script src="src/app.js"></script>
 </body>
 </html>
