@@ -6,13 +6,14 @@ const { exec } = require('child_process');
 const oscDeadMessage = '/avatar/parameters/BJK/IsDead';
 let oscServer;
 let isActive = false;
+let shouldAutoClose = false;
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 600,
     height: 400,
-    minWidth: 420,
-    minHeight: 300,
+    minWidth: 480,
+    minHeight: 280,
     title: 'VRC Katana Kills You',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -21,6 +22,7 @@ const createWindow = () => {
     show: false, // ページがロードされるまではウィンドウを非表示にする
   });
 
+  // TODO: OSC関連処理の分割
   oscServer = new Server(9001, '0.0.0.0', () => {
     console.log('VRC Katana Kills You: Start listening');
   });
@@ -30,18 +32,22 @@ const createWindow = () => {
       // 死んだら1秒後にVRCを殺す
       setTimeout(() => exec('taskkill /IM VRChat.exe'), 1000);
       // console.log('IsDead Listened'); // テスト用
+
+      if (shouldAutoClose) {
+        oscServer.close();
+        app.quit();
+      }
     }
   });
 
-  ipcMain.on('change-active', async () => {
+  // 設定変更時の処理
+  ipcMain.on('change-active', () => {
     // OSCのリッスンを一時停止するほうがいいかも？
     isActive = !isActive;
   });
 
-  // mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする
-  mainWindow.loadFile('index.html');
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show();
+  ipcMain.on('change-auto-close', () => {
+    shouldAutoClose = !shouldAutoClose;
   });
 
   // 各種ショートカットの無効化
@@ -57,6 +63,14 @@ const createWindow = () => {
       event.preventDefault();
     }
   });
+
+  // mainWindow.webContents.openDevTools(); // TODO: 開発時のみ実行されるようにする
+
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show();
+  });
+
+  mainWindow.loadFile('index.html');
 };
 
 app.once('ready', () => {
