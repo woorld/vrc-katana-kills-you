@@ -1,31 +1,25 @@
-# ⚔ VRC Katana Kills You ⚔
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/a2e8b64f-1218-4f87-a508-47dc0ca10f18">
+  <h1>⚔ VRC Katana Kills You ⚔</h1>
+</div>
 
 ## なにこれ
 
-8ya様より販売されている「アバター用カタナキット」( https://booth.pm/ja/items/4213463 )の対戦ギミックで負けた際、VRChatクライアントを自動的に終了させるツールです。
-
-## 必要なもの
-
-- Node.js 20.18.0以上
-  - 作成した環境のバージョンが上記というだけなので、多分大体のバージョンで動きます
+8ya様より販売されている「アバター用カタナキット」( https://booth.pm/ja/items/4213463 )の決闘ギミックで負けた際、VRChatクライアントを自動的に終了させるツールです。
 
 ## つかいかた (Windowsの場合)
 
-1. https://nodejs.org/ja/download からNode.jsをインストール
-2. 当画面( https://github.com/woorld/vrc-katana-kills-you )の右上から「Code」→「Download ZIP」を押してソースをダウンロード
-3. ダウンロードしたファイルを展開
-4. `install.bat`を実行
-5. `run.bat`を実行 (`VRC Katana Kills You: Start listening`と出てきたらOK)
-6. VRChatのExpressionMenuからOSCをオン
+1. リリース一覧( https://github.com/woorld/vrc-katana-kills-you/releases )から最新のものをダウンロードし展開
+2. vrc-katana-kills-you.exeを起動し、タイトル下のスイッチをオン
+3. VRChatのExpressionMenuからOSCをオンにして準備完了
 
-以上を行ったうえでカタナキットを使って対戦すると、負けた後VRChatが終了します。
-
-以降のツール側の準備は`run.bat`を起動するだけで完了します。
+以上を行ったうえでカタナキットを使って決闘すると、負けた後VRChatが終了します。
 
 ## ご注意
 
-- アバターやギミックによらず、`BJK/IsDead`というパラメータがtrueになったら動作します
+- 決闘ギミックで自分が勝った場合は何も起こりません（相手のVRChatが終了したりはしません）
+- アバターやギミックによらず、`BJK/IsDead`というパラメータがOSCで送信された場合に処理が行われます
+  - さらに言うと「/avatar/parameters/BJK/IsDead」というアドレスにtruthyな値が設定されたメッセージを受信した場合
 - VRChatクライアントやPCに負荷をかけて強引に終了させるわけではなく、`taskkill`コマンドを叩いてプロセスを終了しています
 - 「VRChat.exe」という名前のプロセスを **すべて** 終了させるため、複数クライアントを起動している場合や、同名のプロセスが存在する場合はそれらが **すべて** 終了します
 - 使用は自己責任でお願いします
-- Nodeのこと1ミリくらいしかわかりません
