@@ -11,11 +11,8 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 600,
     height: 400,
-    // テスト用
-    /*
-    width: 1000,
-    height: 600,
-    // */
+    minWidth: 420,
+    minHeight: 300,
     title: 'VRC Katana Kills You',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -45,7 +42,21 @@ const createWindow = () => {
   mainWindow.loadFile('index.html');
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
-  })
+  });
+
+  // 各種ショートカットの無効化
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    const disabledShortcuts = [
+      input.control && input.code === 'KeyR',
+      input.code === 'F5',
+      input.code === 'F12',
+      input.shift && input.control && input.code === 'KeyI',
+    ];
+
+    if (disabledShortcuts.some(Boolean)) {
+      event.preventDefault();
+    }
+  });
 };
 
 app.once('ready', () => {
