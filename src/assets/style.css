@@ -25,7 +25,7 @@ body {
   gap: 24px;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #eee, #777)
+  background: linear-gradient(135deg, #e9df55, #92296a)
 }
 
 .title {
@@ -80,6 +80,6 @@ body {
   }
 
   body {
-    background: linear-gradient(135deg, #999, #333)
+    background: linear-gradient(135deg, #b39b33, #85293d);
   }
 }
