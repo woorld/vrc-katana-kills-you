@@ -1,7 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const { Server } = require('node-osc');
-const path = require('path');
-const { execSync } = require('child_process');
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { Server } from 'node-osc';
+import path from 'path';
+import { execSync } from 'child_process';
 
 const oscDeadMessage = '/avatar/parameters/BJK/IsDead';
 let oscServer;
@@ -32,10 +32,10 @@ const createWindow = () => {
       return;
     }
 
+    // console.log('IsDead Listened'); // テスト用
     setTimeout(() => {
       // 死んだらn秒後にVRCを殺す
       execSync('taskkill /IM VRChat.exe');
-      // console.log('IsDead Listened'); // テスト用
 
       if (shouldAutoClose) {
         oscServer.close();
@@ -74,7 +74,11 @@ const createWindow = () => {
     mainWindow.show();
   });
 
-  mainWindow.loadFile('index.html');
+  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+  } else {
+    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+  }
 };
 
 app.once('ready', () => {
