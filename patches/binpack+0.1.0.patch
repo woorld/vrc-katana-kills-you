@@ -1,0 +1,31 @@
+diff --git a/node_modules/binpack/index.js b/node_modules/binpack/index.js
+index d7ed315..fd5f5a9 100644
+--- a/node_modules/binpack/index.js
++++ b/node_modules/binpack/index.js
+@@ -31,7 +31,7 @@ var addBindings = function(binpackTypename, nodeTypename){
+         nodeTypename = binpackTypename;
+     }
+     module.exports['pack' + binpackTypename] = function(num, endian){
+-        b = new Buffer(sizeOfType(binpackTypename));
++        var b = new Buffer.alloc(sizeOfType(binpackTypename));
+         b['write' + nodeTypename + endianConv(endian, binpackTypename)](num, 0, true);
+         return b;
+     }
+@@ -50,7 +50,7 @@ addIntBindings(8);
+ addIntBindings(16);
+ addIntBindings(32);
+ 
+-twoToThe32 = Math.pow(2, 32);
++var twoToThe32 = Math.pow(2, 32);
+ 
+ // 64 bit bindings require special care
+ var read64 = function(unsigned){return function(buff, endian){
+@@ -70,7 +70,7 @@ var read64 = function(unsigned){return function(buff, endian){
+ var write64 = function(unsigned){return function(num, endian){
+     var e = endianConv(endian, '');
+     var u = unsigned ? 'U' : '';
+-    var b = new Buffer(8);
++    var b = new Buffer.alloc(8);
+     var high = Math.floor(num / twoToThe32);
+     var low = Math.floor(num - high * twoToThe32);
+     if(e == 'LE') {
