@@ -57,10 +57,10 @@ const createWindow = () => {
   // 各種ショートカットの無効化
   mainWindow.webContents.on('before-input-event', (event, input) => {
     const disabledShortcuts = [
-      input.control && input.code === 'KeyR',
+      // input.control && input.code === 'KeyR',
       input.code === 'F5',
       input.code === 'F12',
-      input.shift && input.control && input.code === 'KeyI',
+      // input.shift && input.control && input.code === 'KeyI',
     ];
 
     if (disabledShortcuts.some(Boolean)) {
