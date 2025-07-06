@@ -1,5 +1,5 @@
-// NOTE: サンドボックスが有効（nodeIntegration: false）な場合、preloadではESModuleが使えない
-const { ipcRenderer, contextBridge } = require('electron');
+// NOTE: なんか制限付きでimportが使える
+import { ipcRenderer, contextBridge } from 'electron';
 
 contextBridge.exposeInMainWorld('osc', {
   changeActive: isActive => ipcRenderer.send('change-active', isActive),
