@@ -16,7 +16,7 @@ import SettingList from './components/setting-list.vue';
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .root {
   display: flex;
   flex-direction: column;
@@ -30,10 +30,10 @@ import SettingList from './components/setting-list.vue';
   justify-content: center;
   align-items: center;
   gap: 16px;
-}
 
-.title__logo {
-  width: 48px;
-  height: 48px;
+  &__logo {
+    width: 48px;
+    height: 48px;
+  }
 }
 </style>

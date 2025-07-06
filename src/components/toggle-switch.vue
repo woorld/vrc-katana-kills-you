@@ -24,7 +24,7 @@ const callApi = (e) => {
   </SettingListItem>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .toggle__wrapper {
   width: 48px;
   height: 24px;
@@ -35,27 +35,27 @@ const callApi = (e) => {
   overflow: hidden;
   transition: 200ms ease;
   padding: 2px;
-}
 
-.toggle__wrapper::before {
-  content: "";
-  width: 24px;
-  height: 100%;
-  background-color: #eee;
-  transition: 200ms ease;
-  box-shadow: 0 0 12px #aaa;
-  border-radius: 50px;
-}
+  &::before {
+    content: "";
+    width: 24px;
+    height: 100%;
+    background-color: #eee;
+    transition: 200ms ease;
+    box-shadow: 0 0 12px #aaa;
+    border-radius: 50px;
+  }
 
-.toggle__wrapper:has(.toggle__input:checked) {
-  background-color: #52e466;
-}
+  &:has(.toggle__input:checked) {
+    background-color: #52e466;
 
-.toggle__wrapper:has(.toggle__input:checked)::before {
-  transform: translateX(24px);
-}
+    &::before {
+      transform: translateX(24px);
+    }
+  }
 
-.toggle__input {
-  display: none;
+  .toggle__input {
+    display: none;
+  }
 }
 </style>
