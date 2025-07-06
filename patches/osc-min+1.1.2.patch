@@ -1,0 +1,92 @@
+diff --git a/node_modules/osc-min/lib/index.js b/node_modules/osc-min/lib/index.js
+index 5292d7e..4136ec7 100644
+--- a/node_modules/osc-min/lib/index.js
++++ b/node_modules/osc-min/lib/index.js
+@@ -118,9 +118,9 @@
+ // `strict` is an optional parameter that makes the function fail more often.
+   exports.fromBuffer = function(buffer, strict) {
+     if (buffer instanceof ArrayBuffer) {
+-      buffer = new Buffer(new Uint8Array(buffer));
++      buffer = Buffer.from(new Uint8Array(buffer));
+     } else if (buffer instanceof Uint8Array) {
+-      buffer = new Buffer(buffer);
++      buffer = Buffer.from(buffer);
+     }
+     return utils.fromOscPacket(buffer, strict);
+   };
+diff --git a/node_modules/osc-min/lib/osc-utilities.js b/node_modules/osc-min/lib/osc-utilities.js
+index a27b002..711cbbe 100644
+--- a/node_modules/osc-min/lib/osc-utilities.js
++++ b/node_modules/osc-min/lib/osc-utilities.js
+@@ -21,7 +21,7 @@
+       buffer = buffers[k];
+       sumLength += buffer.length;
+     }
+-    destBuffer = new Buffer(sumLength);
++    destBuffer = Buffer.alloc(sumLength);
+     copyTo = 0;
+     for (l = 0, len2 = buffers.length; l < len2; l++) {
+       buffer = buffers[l];
+@@ -46,7 +46,7 @@
+     for (i = j = 0, ref = padding(str); 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
+       str += "\u0000";
+     }
+-    return new Buffer(str);
++    return Buffer.from(str);
+   };
+ 
+   exports.splitOscString = function(buffer, strict) {
+@@ -62,7 +62,7 @@
+       }
+       return {
+         string: rawStr,
+-        rest: new Buffer(0)
++        rest: Buffer.alloc(0)
+       };
+     }
+     str = rawStr.slice(0, nullIndex);
+@@ -313,7 +313,7 @@
+         if (!value && strict) {
+           throw new Error("true must be true");
+         }
+-        return new Buffer(0);
++        return Buffer.alloc(0);
+       }
+     },
+     F: {
+@@ -328,7 +328,7 @@
+         if (value && strict) {
+           throw new Error("false must be false");
+         }
+-        return new Buffer(0);
++        return Buffer.alloc(0);
+       }
+     },
+     N: {
+@@ -343,7 +343,7 @@
+         if (value && strict) {
+           throw new Error("null must be false");
+         }
+-        return new Buffer(0);
++        return Buffer.alloc(0);
+       }
+     },
+     I: {
+@@ -355,7 +355,7 @@
+         };
+       },
+       toArg: function(value, strict) {
+-        return new Buffer(0);
++        return Buffer.alloc(0);
+       }
+     }
+   };
+@@ -645,7 +645,7 @@
+         elem = elems[j];
+         totalLength += 4 + elem.length;
+       }
+-      outBuffer = new Buffer(totalLength);
++      outBuffer = Buffer.from(totalLength);
+       bundleTagBuffer.copy(outBuffer, 0);
+       timetagBuffer.copy(outBuffer, bundleTagBuffer.length);
+       copyIndex = bundleTagBuffer.length + timetagBuffer.length;
