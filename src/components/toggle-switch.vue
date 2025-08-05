@@ -1,14 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import SettingListItem from './setting-list-item.vue';
 
-const props = defineProps({
+const props = defineProps<{
   label: String,
-  callApiName: String,
-});
+  callApiName: 'changeActive' | 'changeAutoClose',
+}>();
 
-const callApi = (e) => {
-  window.osc[props.callApiName](e.target.checked);
-}
+const callApi = (e: Event) => {
+  window.osc[props.callApiName]((e.target as HTMLInputElement).checked);
+};
 </script>
 
 <template>
