@@ -1,6 +1,6 @@
-const { Server } = require('node-osc');
-const readline = require('readline');
-const { oscSetting } = require('./constants');
+import { Server } from 'node-osc';
+import readline from 'readline';
+import { oscSetting } from './constants';
 
 const log = (str) => console.log('osc-listener: ' + str);
 
