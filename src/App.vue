@@ -3,37 +3,59 @@ import SettingList from './components/setting-list.vue';
 </script>
 
 <template>
-  <main class="root">
-    <div class="title">
-      <img
-        src="./assets/logo.png"
-        alt="VRC Katana Kills Youのロゴ"
-        class="title__logo"
-      >
-      <h1 class="title__text">VRC Katana Kills You</h1>
-    </div>
-    <SettingList />
-  </main>
+  <VApp class="root">
+    <VMain class="d-flex justify-center align-center flex-column ga-12">
+      <div class="title d-flex justify-center align-center ga-4">
+        <img
+          src="./assets/logo.png"
+          alt="Katana Kills Youのロゴ"
+          class="title__logo"
+        />
+        <h1 class="text-h4 font-weight-bold">Katana Kills You</h1>
+      </div>
+      <SettingList />
+    </VMain>
+  </VApp>
 </template>
 
 <style scoped lang="scss">
 .root {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 48px;
+  background: linear-gradient(135deg, #e9df55, #92296a);
 }
 
 .title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-
   &__logo {
     width: 48px;
     height: 48px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .root {
+    background: linear-gradient(135deg, #b39b33, #85293d);
+  }
+}
+</style>
+
+<style>
+@font-face {
+  font-family: "Noto Sans JP";
+  src:
+    local("Noto Sans JP"),
+    url("./NotoSansJP-Medium.ttf") format("truetype");
+}
+
+* {
+  font-family: "Noto Sans" !important;
+  color: #222;
+  user-select: none;
+  -webkit-user-drag: none;
+  list-style: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    color: #fff;
   }
 }
 </style>
