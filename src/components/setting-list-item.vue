@@ -1,18 +1,33 @@
+<script setup lang="ts">
+const props = defineProps<{
+  label: String,
+  callApiName: 'changeActive' | 'changeAutoClose',
+}>();
+
+const callApi = (e: Event) => {
+  window.osc[props.callApiName]((e.target as HTMLInputElement).checked);
+};
+</script>
+
 <template>
-  <li class="setting-list__item">
-    <slot />
-  </li>
+  <VSwitch
+    inset
+    hide-details
+    center-affix
+    color="green"
+    class="justify-md-end"
+    @change="callApi"
+  >
+    <template #prepend>{{ props.label }}</template>
+  </VSwitch>
 </template>
 
 <style scoped lang="scss">
-.setting-list__item {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+:deep(.v-input__control) {
+  justify-content: flex-end;
+}
 
-  &:nth-child(n + 2) {
-    margin-top: 12px;
-  }
+:deep(.v-selection-control.v-selection-control--density-default) {
+  flex: unset;
 }
 </style>
