@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import SettingList from './components/setting-list.vue';
+import SettingDialog from './components/setting-dialog.vue';
+
+// ダイアログ表示時のブラー用
+const vAppClass = ref('root');
+const onUpdateDialogVisibility = (isShow: boolean) => {
+  vAppClass.value = `root${isShow ? ' blur' : ''}`;
+}
 </script>
 
 <template>
-  <VApp class="root">
+  <VApp :class="vAppClass">
     <VMain class="d-flex justify-center align-center flex-column ga-12">
       <div class="title d-flex justify-center align-center ga-4">
         <img
@@ -15,12 +23,18 @@ import SettingList from './components/setting-list.vue';
       </div>
       <SettingList />
     </VMain>
+    <SettingDialog @update-visibility="onUpdateDialogVisibility" />
   </VApp>
 </template>
 
 <style scoped lang="scss">
 .root {
   background: linear-gradient(135deg, #e9df55, #92296a);
+  transition: filter 200ms ease;
+
+  &.blur {
+    filter: blur(8px);
+  }
 }
 
 .title {
