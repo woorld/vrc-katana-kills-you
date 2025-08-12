@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import SettingListItem from './setting-list-item.vue';
 import ToggleSwitch from './toggle-switch.vue';
 </script>

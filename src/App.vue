@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import SettingList from './components/setting-list.vue';
 </script>
 
