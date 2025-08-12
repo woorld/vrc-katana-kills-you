@@ -53,6 +53,10 @@ import SettingList from './components/setting-list.vue';
   list-style: none;
 }
 
+html {
+  overflow-y: auto !important;
+}
+
 @media (prefers-color-scheme: dark) {
   * {
     color: #fff;
